@@ -8,7 +8,7 @@ const app = express();
 app.use(helmet());
 
 app.use(cors({origin:"*"}));
-const PORT = process.env.PORT;
+const PORT = process.env.PORT ?? 3000;
 
 app.get('/notes', (req, res)=>{
     logger(req, res);
@@ -35,9 +35,12 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
+const isProd = process.env.NODE_ENV === "production";
+
   res.status(500).json({
-    message: 'Internal Server Error',
-    error: err.message,
+    message: isProd
+      ? "Something went wrong. Please try again later."
+      : err.message,
   });
 });
 
