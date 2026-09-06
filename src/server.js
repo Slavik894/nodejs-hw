@@ -8,8 +8,6 @@ const app = express();
 app.use(helmet());
 
 app.use(cors({origin:"*"}));
-const PORT = process.env.PORT ?? 3000;
-
 app.get('/notes', (req, res)=>{
     logger(req, res);
     res.status(200).json({
@@ -45,6 +43,6 @@ const isProd = process.env.NODE_ENV === "production";
 });
 
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
