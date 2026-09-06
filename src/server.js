@@ -5,9 +5,11 @@ import logger from 'pino-http';
 import helmet from 'helmet';
 
 const app = express();
-app.use(helmet());
+const PORT = process.env.PORT || 10000;
 
+app.use(helmet());
 app.use(cors({origin:"*"}));
+
 app.get('/notes', (req, res)=>{
     logger(req, res);
     res.status(200).json({
@@ -43,6 +45,6 @@ const isProd = process.env.NODE_ENV === "production";
 });
 
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(PORT, '0.0.0.0', ()=>{
+    console.log(`Server is running on port ${PORT}`);
 });
