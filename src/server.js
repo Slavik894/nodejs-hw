@@ -5,7 +5,7 @@ import logger from 'pino-http';
 import helmet from 'helmet';
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 1000;
 
 app.use(helmet());
 app.use(cors({origin:"*"}));
