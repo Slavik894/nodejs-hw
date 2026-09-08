@@ -1,30 +1,48 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import logger from 'pino-http';
+import pino from 'pino-http';
 import helmet from 'helmet';
 
 const app = express();
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
+app.use(express.json());
 app.use(cors({origin:"*"}));
 
+app.use(express.json());
+app.use(cors());
+app.use(
+  pino({
+    level: 'info',
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'HH:MM:ss',
+        ignore: 'pid,hostname',
+        messageFormat: '{req.method} {req.url} {res.statusCode} - {responseTime}ms',
+        hideObject: true,
+      },
+    },
+  }),
+);
+
 app.get('/notes', (req, res)=>{
-    logger(req, res);
     res.status(200).json({
         "message": "Retrieved all notes"
     });
 });
 
 app.get('/notes/:noteId',(req, res)=>{ 
-    logger(req, res);
+    const {noteId} = req.params;
     res.status(200).json({
-        "message": "Retrieved note with ID: id_param"
+        "message": `Retrieved note with ID: ${noteId}`
     });
 });
 
-app.get('/test-error', () => {
+app.get('/test-error', (req, res) => {
   throw new Error('Simulated server error');
 });
 
