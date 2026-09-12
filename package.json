@@ -27,6 +27,7 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "http-errors": "^2.0.1",
     "mongoose": "^9.10.0",
     "pino-http": "^11.0.0"
   }
