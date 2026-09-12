@@ -7,7 +7,7 @@ const noteSchema = new Schema(
             required: true,
             trim: true,
         },
-        constent:{
+        content:{
             type: String,
             trim: true,
             default: "",
