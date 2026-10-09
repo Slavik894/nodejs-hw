@@ -1,8 +1,8 @@
 import createHttpError from "http-errors";
-import { User } from "../models/user";
-import { createSession, setSessionCookies } from "../services/auth";
+import { User } from "../models/user.js";
+import { createSession, setSessionCookies } from "../services/auth.js";
 import bcrypt from "bcrypt";
-import { Session } from "../models/session";
+import { Session } from "../models/session.js";
 
 export const registerUser = async(req, res) => {
     const {email, password} = req.body;

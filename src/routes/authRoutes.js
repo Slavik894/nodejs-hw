@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { loginUser, logoutUser, refreshUserSession, registerUser } from "../controllers/authController";
-import { loginUserSchema, registerUserSchema } from "../validations/authValidation";
+import { loginUser, logoutUser, refreshUserSession, registerUser } from "../controllers/authController.js";
+import { loginUserSchema, registerUserSchema } from "../validations/authValidation.js";
 import { celebrate } from "celebrate";
 
 const router = Router();
